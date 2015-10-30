@@ -1,0 +1,9 @@
+C:\Users\Antho\Desktop\Battleship-Serveur\Battleship-Serveur\bin\Debug\Battleship-Serveur.exe.config
+C:\Users\Antho\Desktop\Battleship-Serveur\Battleship-Serveur\bin\Debug\Battleship-Serveur.exe
+C:\Users\Antho\Desktop\Battleship-Serveur\Battleship-Serveur\bin\Debug\Battleship-Serveur.pdb
+C:\Users\Antho\Desktop\Battleship-Serveur\Battleship-Serveur\obj\Debug\Battleship-Serveur.csprojResolveAssemblyReference.cache
+C:\Users\Antho\Desktop\Battleship-Serveur\Battleship-Serveur\obj\Debug\Battleship_Serveur.Serveur.resources
+C:\Users\Antho\Desktop\Battleship-Serveur\Battleship-Serveur\obj\Debug\Battleship_Serveur.Properties.Resources.resources
+C:\Users\Antho\Desktop\Battleship-Serveur\Battleship-Serveur\obj\Debug\Battleship-Serveur.csproj.GenerateResource.Cache
+C:\Users\Antho\Desktop\Battleship-Serveur\Battleship-Serveur\obj\Debug\Battleship-Serveur.exe
+C:\Users\Antho\Desktop\Battleship-Serveur\Battleship-Serveur\obj\Debug\Battleship-Serveur.pdb

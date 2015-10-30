@@ -1,0 +1,4 @@
+Bloquer lors de la victoire! vulve
+Pas crasher quand un socket ferme
+Se connecter quand on fait nouvelle partie et envoyer les bons emplacements de bateaux
+2 joueurs (Tour par tour)
