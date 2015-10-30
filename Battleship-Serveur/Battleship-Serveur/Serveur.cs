@@ -113,7 +113,7 @@ namespace Battleship_Serveur
             
             if(VerifierFin(p))
             {
-                message = "Fini";
+                message = "Gagne";
             }
 
             if(Pstream.CanWrite)

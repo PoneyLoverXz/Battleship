@@ -18,6 +18,8 @@ namespace Battleship_Client
         const int ROWS_COUNT = 10;
         const int COLUMNS_COUNT = 10;
 
+        bool Place = false;
+
         int rowIndex;
         int colIndex;
         byte[] bytes = new byte[10];
@@ -55,6 +57,7 @@ namespace Battleship_Client
             if (form.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 FillDGV(form.dgv);
+                Place = true;
             }
         }
 
@@ -102,22 +105,63 @@ namespace Battleship_Client
             IPEndPoint localEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 1234);
             try
             {
-                if (!sck.Connected)
-                {
-                    sck.Connect(localEndPoint);
-                    TB_Results.Text += "Client connected!" + Environment.NewLine;
-                }
 
-                NetworkStream stream = sck.GetStream();
-                //string text = CB_Ligne.SelectedItem.ToString() + CB_Colonne.SelectedItem.ToString();
-                string text = "CTA0A1A2" + "PAB0B1B2B3B4" + "CRC0C1C2C3" + "TOD0D1" + "SME0E1E2";
-                byte[] data = Encoding.ASCII.GetBytes(text);
-                stream.Write(data, 0, data.Length);
+                if (Place)
+                {
+                    if (!sck.Connected)
+                    {
+                        sck.Connect(localEndPoint);
+                        TB_Results.Text += "Client connected!" + Environment.NewLine;
+                    }
+
+                    NetworkStream stream = sck.GetStream();
+                    string Ships = GetShips();
+                    byte[] data = Encoding.ASCII.GetBytes(Ships);
+                    stream.Write(data, 0, data.Length);
+                }
+                else
+                {
+                    MessageBox.Show("Vous devez commencer une nouvelle partie avant de se connecter au serveur!");
+                }
             }
             catch
             {
                 TB_Results.Text = "Unable to connect to remote end point!" + Environment.NewLine;
             }
+        }
+
+        private string GetShips()
+        {
+            string CT = "CT";
+            string PA = "PA";
+            string CR = "CR";
+            string TO = "TO";
+            string SM = "SM";
+
+            // Parcourir le DGV
+            for (int i = 0; i < ROWS_COUNT; i++)
+            {
+                for (int j = 0; j < COLUMNS_COUNT; j++)
+                {
+                    // Regarder si la case appartient à un bateau
+                    if(DGV_Joueurs.Rows[i].Cells[j].Value != "")
+                    {
+                        // Regarder c'est quel Bateau
+                        if (DGV_Joueurs.Rows[i].Cells[j].Value == "CT")
+                            CT += GetRowCode(i) + j.ToString();
+                        else if(DGV_Joueurs.Rows[i].Cells[j].Value == "P")
+                            PA += GetRowCode(i) + j.ToString();
+                        else if(DGV_Joueurs.Rows[i].Cells[j].Value == "C")
+                            CR += GetRowCode(i) + j.ToString();
+                        else if(DGV_Joueurs.Rows[i].Cells[j].Value == "T")
+                            TO += GetRowCode(i) + j.ToString();
+                        else if(DGV_Joueurs.Rows[i].Cells[j].Value == "S")
+                            SM += GetRowCode(i) + j.ToString();
+                    }
+                }
+            }
+
+            return CT + PA + CR + TO + SM;
         }
 
         private void BTN_Lancer_Click(object sender, EventArgs e)
@@ -185,8 +229,11 @@ namespace Battleship_Client
                 WriteMessage("Hit!");
                 ChangeColor(Color.Red);
             }
-            else if(result.StartsWith("Fini"))
+            else if(result.StartsWith("Gagne"))
             {
+                DGV_Joueurs.Enabled = false;
+                DGV_Adversaire.Enabled = false;
+                MessageBox.Show("Partie Terminée, vous avez gagné!");
                 WriteMessage("THE GAME IS DONEEEEE");
                 ChangeColor(Color.Red);
             }

@@ -8,3 +8,13 @@ C:\Users\Antho\Desktop\Battleship-Client\Battleship-Client\obj\Debug\Battleship-
 C:\Users\Antho\Desktop\Battleship-Client\Battleship-Client\obj\Debug\Battleship-Client.pdb
 C:\Users\Antho\Desktop\Battleship-Client\Battleship-Client\obj\Debug\Battleship_Client.PlacerBateaux.resources
 C:\Users\Antho\Desktop\Battleship-Client\Battleship-Client\obj\Debug\Battleship_Client.Jeu.resources
+C:\Users\Alexis\Desktop\Battleship\Battleship-Client\Battleship-Client\bin\Debug\Battleship-Client.exe.config
+C:\Users\Alexis\Desktop\Battleship\Battleship-Client\Battleship-Client\obj\Debug\Battleship-Client.exe
+C:\Users\Alexis\Desktop\Battleship\Battleship-Client\Battleship-Client\obj\Debug\Battleship-Client.pdb
+C:\Users\Alexis\Desktop\Battleship\Battleship-Client\Battleship-Client\bin\Debug\Battleship-Client.exe
+C:\Users\Alexis\Desktop\Battleship\Battleship-Client\Battleship-Client\bin\Debug\Battleship-Client.pdb
+C:\Users\Alexis\Desktop\Battleship\Battleship-Client\Battleship-Client\obj\Debug\Battleship-Client.csprojResolveAssemblyReference.cache
+C:\Users\Alexis\Desktop\Battleship\Battleship-Client\Battleship-Client\obj\Debug\Battleship_Client.Jeu.resources
+C:\Users\Alexis\Desktop\Battleship\Battleship-Client\Battleship-Client\obj\Debug\Battleship_Client.PlacerBateaux.resources
+C:\Users\Alexis\Desktop\Battleship\Battleship-Client\Battleship-Client\obj\Debug\Battleship_Client.Properties.Resources.resources
+C:\Users\Alexis\Desktop\Battleship\Battleship-Client\Battleship-Client\obj\Debug\Battleship-Client.csproj.GenerateResource.Cache
