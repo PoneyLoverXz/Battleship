@@ -118,6 +118,10 @@ namespace Battleship_Client
                     string Ships = GetShips();
                     byte[] data = Encoding.ASCII.GetBytes(Ships);
                     stream.Write(data, 0, data.Length);
+
+                    //Thread t = new Thread(new ThreadStart(WaitforResponse));
+                    //t.IsBackground = true;
+                    //t.Start();
                 }
                 else
                 {
@@ -128,6 +132,21 @@ namespace Battleship_Client
             {
                 TB_Results.Text = "Unable to connect to remote end point!" + Environment.NewLine;
             }
+        }
+
+        private void WaitforResponse()
+        {
+            NetworkStream stream = sck.GetStream();
+            string text = GetRowCode(rowIndex) + (colIndex).ToString();
+            byte[] data = Encoding.ASCII.GetBytes(text);
+            stream.Write(data, 0, data.Length);
+            int readBytes = stream.Read(bytes, 0, bytes.Length);
+            string result = Encoding.ASCII.GetString(bytes, 0, bytes.Length);
+
+            int Row = GetRowNum(result[0]);
+            int Column = result[1];
+
+
         }
 
         private string GetShips()
@@ -187,6 +206,32 @@ namespace Battleship_Client
             }
         }
 
+        private int GetRowNum(char p)
+        {
+            if (p == 'A')
+                return 0;
+            else if (p == 'B')
+                return 1;
+            else if (p == 'C')
+                return 2;
+            else if (p == 'D')
+                return 3;
+            else if (p == 'E')
+                return 4;
+            else if (p == 'F')
+                return 5;
+            else if (p == 'G')
+                return 6;
+            else if (p == 'H')
+                return 7;
+            else if (p == 'I')
+                return 8;
+            else if (p == 'J')
+                return 9;
+            else
+                return -1;
+        }
+
         private void DGV_Adversaire_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -237,6 +282,7 @@ namespace Battleship_Client
                 WriteMessage("THE GAME IS DONEEEEE");
                 ChangeColor(Color.Red);
             }
+
         }
 
         public void WriteMessage(String msg)

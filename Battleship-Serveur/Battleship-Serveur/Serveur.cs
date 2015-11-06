@@ -18,6 +18,8 @@ namespace Battleship_Serveur
         static byte[] Buffer { get; set; }
         static TcpListener serversocket;
 
+        bool end;
+
         byte[] bytes = new byte[1024];
         Thread t;
         Player p1 = new Player();
@@ -26,6 +28,7 @@ namespace Battleship_Serveur
         TcpClient tcpP2;
         int tour = 1;
         string message = "";
+
         public Serveur()
         {
             InitializeComponent();
@@ -53,17 +56,17 @@ namespace Battleship_Serveur
                 InstancierBateaux(p1, P1stream);
                 WriteMessage("Premier Joueur accepté");
 
-                //tcpP2 = serversocket.AcceptTcpClient();
-                //NetworkStream P2stream = tcpP2.GetStream();
-                //P2stream.ReadTimeout = 10000;
-                //InstancierBateaux(p2, P2stream);
-                //WriteMessage("Deuxième Joueur accepté");
+                tcpP2 = serversocket.AcceptTcpClient();
+                NetworkStream P2stream = tcpP2.GetStream();
+                InstancierBateaux(p2, P2stream);
+                WriteMessage("Deuxième Joueur accepté");
 
                 WriteMessage("Tous les bateaux sont prêts");
 
-                while (true)
+                while (!end)
                 {
-                    ReceiveAttack(p1, P1stream);
+                    ReceiveAttack(p1, P2stream, P1stream);
+                    ReceiveAttack(p2, P1stream, P2stream);
                 }
             }
             catch(Exception se)
@@ -72,7 +75,7 @@ namespace Battleship_Serveur
             }
         }
 
-        private void ReceiveAttack(Player p, NetworkStream Pstream)
+        private void ReceiveAttack(Player p, NetworkStream Pstream, NetworkStream PstreamAttacker)
         {
             bool hit = false;
             int numberOfBytesRead = 0;
@@ -126,6 +129,18 @@ namespace Battleship_Serveur
             {
                 WriteMessage("cant write");
             }
+
+            //if (PstreamAttacker.CanWrite)
+            //{
+            //    Buffer = Encoding.ASCII.GetBytes(message);
+            //    Pstream.Write(Buffer, 0, Buffer.Length);
+            //    Pstream.Flush();
+            //}
+            //else
+            //{
+            //    WriteMessage("cant write");
+            //}
+            
         }
 
         private bool VerifierTouche(string[] p, string attack)
@@ -163,7 +178,7 @@ namespace Battleship_Serveur
 
         private bool VerifierFin(Player p)
         {
-            bool end = true;
+            end = true;
             if(end)
                 end = VerifierCoule(p.PorteAvion);
             if(end)
